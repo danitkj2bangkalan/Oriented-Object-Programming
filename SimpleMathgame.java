@@ -79,8 +79,8 @@ public class SimpleMathgame extends Application
                        "-fx-border-insets : 5;"+
                        "-fx-border-radius : 5;"+
                        "-fx-border-color: black;"+
-                       "-fx-background-image : url(wpa.jpg);");
-        Scene scene = new Scene(bpane, 540, 200);
+                       "-fx-background-color : #384a68;");
+        Scene scene = new Scene(bpane, 430, 200);
         stage.setTitle("Project PBO");
         stage.setScene(scene);
         stage.show();
@@ -130,7 +130,8 @@ public class SimpleMathgame extends Application
                        "-fx-border-insets : 5;"+
                        "-fx-border-radius : 5;"+
                        "-fx-border-color: red;"+
-                       "-fx-background-image : url(tambah.png);");
+                       "-fx-background-image : url(tambah.png);"+
+                       "-fx-background-repeat : no-repeat;");
         bpane.setCenter(vbox2);
     }
     public void Pengurangan(){
@@ -176,7 +177,8 @@ public class SimpleMathgame extends Application
                        "-fx-border-insets : 5;"+
                        "-fx-border-radius : 5;"+
                        "-fx-border-color: green;"+
-                       "-fx-background-image : url(kurang.jpg);");
+                       "-fx-background-image : url(kurang.jpg);"+
+                       "-fx-background-repeat : no-repeat;");
         bpane.setCenter(vbox2);
     }
     public void Perkalian(){
@@ -223,7 +225,8 @@ public class SimpleMathgame extends Application
                        "-fx-border-insets : 5;"+
                        "-fx-border-radius : 5;"+
                        "-fx-border-color: yellow;"+
-                       "-fx-background-image : url(kali.png);");
+                       "-fx-background-image : url(kali.png);"+
+                       "-fx-background-repeat : no-repeat;");
         bpane.setCenter(vbox2);
     }
     public void Pembagian(){
@@ -272,7 +275,8 @@ public class SimpleMathgame extends Application
                        "-fx-border-insets : 5;"+
                        "-fx-border-radius : 5;"+
                        "-fx-border-color: blue;"+
-                       "-fx-background-image : url(bagi.png);");
+                       "-fx-background-image : url(bagi.png);"+
+                       "-fx-background-repeat : no-repeat;");
         bpane.setCenter(vbox2);
     }
     public void exe(){
