@@ -14,8 +14,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.effect.*;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
+import javafx.scene.image.*;
 import java.lang.Math.*;
-
+import java.io.*;
 public class SimpleMathgame extends Application
 {
     // We keep track of the count, and label displaying the count:
@@ -23,7 +24,7 @@ public class SimpleMathgame extends Application
         launch(args);
     }
     Stage stage;
-    Button penjumlahan,pengurangan,perkalian,pembagian,operan,salah,benar;
+    Button penjumlahan,pengurangan,perkalian,pembagian,operan,cek;
     BorderPane bpane;
     GridPane gpane;
     VBox vbox,vbox2;
@@ -31,13 +32,9 @@ public class SimpleMathgame extends Application
     Text text,caption,equals,jumlah,operan1s,operan2s,hasils;
     Line line,line2,line3,line4;
     int score = 50;
-    int operan1 ;
-    int operan2 ;
-    int hasil ;
-    String hasil1,hasil2;
-    String hasil3 = "1";
-    String hasil4 = "1";
-    
+    int operan1,operan2 ;
+    String hasil1,hasil3;
+    TextField question;
     public void start(Stage stage) {
         
         penjumlahan = new Button("Penjumlahan");
@@ -76,13 +73,18 @@ public class SimpleMathgame extends Application
         bpane = new BorderPane();
         bpane.setLeft(vbox);
         bpane.setCenter(vbox2);
-        
+        bpane.setStyle("-fx-padding : 10;"+ 
+                       "-fx-border-style : solid inside;"+
+                       "-fx-border-width : 2;"+
+                       "-fx-border-insets : 5;"+
+                       "-fx-border-radius : 5;"+
+                       "-fx-border-color: black;"+
+                       "-fx-background-image : url(wpa.jpg);");
         Scene scene = new Scene(bpane, 540, 200);
         stage.setTitle("Project PBO");
         stage.setScene(scene);
         stage.show();
     }
-    
     public void Penjumlahan(){
         int value = this.score;
         String x = String.valueOf(value);
@@ -103,34 +105,34 @@ public class SimpleMathgame extends Application
         this.operan2 = operan2;
         String a=String.valueOf(operan2);
         operan2s.setText(a);
-        int hasil = (int)(Math.random() * 21);
-        String b = String.valueOf(hasil);
-        hasils.setText(b);
-        this.hasil2 = b;
-        this.hasil4 = b;
-        //untuk view of operation
         
+        question = new TextField();
+        
+        //untuk view of operation
         int temp = this.operan1 + this.operan2;
         String f = String.valueOf(temp);
         this.hasil1 = f;
-        this.hasil3 = f;
         
-        salah = new Button("Salah");
-        benar = new Button("Benar");
+        cek = new Button("Cek Jawaban");
+        cek.setOnAction(e -> exe());
         
-        salah.setOnAction(e -> exesalah());
-        benar.setOnAction(e -> exebenar());
         
-        hbox2 = new HBox(10,salah,benar);
+        hbox2 = new HBox(10,cek);
         hbox2.setAlignment(Pos.CENTER);
-        hbox = new HBox(10,operan1s,jumlah,operan2s,equals,hasils);
+        hbox = new HBox(10,operan1s,jumlah,operan2s,equals,question);
         hbox.setAlignment(Pos.CENTER);
         vbox2 = new VBox(10,skor,hbox,hbox2);
         vbox2.setAlignment(Pos.CENTER);
         vbox2.setPadding(new Insets(10));
+        vbox2.setStyle("-fx-padding : 10;"+ 
+                       "-fx-border-style : solid inside;"+
+                       "-fx-border-width : 2;"+
+                       "-fx-border-insets : 5;"+
+                       "-fx-border-radius : 5;"+
+                       "-fx-border-color: red;"+
+                       "-fx-background-image : url(tambah.png);");
         bpane.setCenter(vbox2);
     }
-    
     public void Pengurangan(){
     int value = this.score;
         String x = String.valueOf(value);
@@ -151,31 +153,30 @@ public class SimpleMathgame extends Application
         this.operan2 = operan2;
         String a=String.valueOf(operan2);
         operan2s.setText(a);
-        int hasil = (int)(Math.random() * 21);
-        String b = String.valueOf(hasil);
-        hasils.setText(b);
-        this.hasil2 = b;
-        this.hasil4 = b;
+        question = new TextField();
         //untuk view of operation
         
         int temp = this.operan1 - this.operan2;
         String f = String.valueOf(temp);
         this.hasil1 = f;
-        this.hasil3 = f;
         
-        salah = new Button("Salah");
-        benar = new Button("Benar");
+        cek = new Button("Cek Jawaban");
+        cek.setOnAction(e -> exe());
         
-        salah.setOnAction(e -> exesalah());
-        benar.setOnAction(e -> exebenar());
-        
-        hbox2 = new HBox(10,salah,benar);
+        hbox2 = new HBox(10,cek);
         hbox2.setAlignment(Pos.CENTER);
-        hbox = new HBox(10,operan1s,jumlah,operan2s,equals,hasils);
+        hbox = new HBox(10,operan1s,jumlah,operan2s,equals,question);
         hbox.setAlignment(Pos.CENTER);
         vbox2 = new VBox(10,skor,hbox,hbox2);
         vbox2.setAlignment(Pos.CENTER);
         vbox2.setPadding(new Insets(10));
+        vbox2.setStyle("-fx-padding : 10;"+ 
+                       "-fx-border-style : solid inside;"+
+                       "-fx-border-width : 2;"+
+                       "-fx-border-insets : 5;"+
+                       "-fx-border-radius : 5;"+
+                       "-fx-border-color: green;"+
+                       "-fx-background-image : url(kurang.jpg);");
         bpane.setCenter(vbox2);
     }
     public void Perkalian(){
@@ -198,31 +199,31 @@ public class SimpleMathgame extends Application
         this.operan2 = operan2;
         String a=String.valueOf(operan2);
         operan2s.setText(a);
-        int hasil = (int)(Math.random() * 101);
-        String b = String.valueOf(hasil);
-        hasils.setText(b);
-        this.hasil2 = b;
-        this.hasil4 = b;
+        question = new TextField();
         //untuk view of operation
         
         int temp = this.operan1 * this.operan2;
-        String f = String.valueOf(temp);
+        String f = String.valueOf(operan1);
         this.hasil1 = f;
-        this.hasil3 = f;
         
-        salah = new Button("Salah");
-        benar = new Button("Benar");
+        cek = new Button("Cek Jawaban");
+        cek.setOnAction(e -> exe());
         
-        salah.setOnAction(e -> exesalah());
-        benar.setOnAction(e -> exebenar());
         
-        hbox2 = new HBox(10,salah,benar);
+        hbox2 = new HBox(10,cek);
         hbox2.setAlignment(Pos.CENTER);
-        hbox = new HBox(10,operan1s,jumlah,operan2s,equals,hasils);
+        hbox = new HBox(10,operan1s,jumlah,operan2s,equals,question);
         hbox.setAlignment(Pos.CENTER);
         vbox2 = new VBox(10,skor,hbox,hbox2);
         vbox2.setAlignment(Pos.CENTER);
         vbox2.setPadding(new Insets(10));
+        vbox2.setStyle("-fx-padding : 10;"+ 
+                       "-fx-border-style : solid inside;"+
+                       "-fx-border-width : 2;"+
+                       "-fx-border-insets : 5;"+
+                       "-fx-border-radius : 5;"+
+                       "-fx-border-color: yellow;"+
+                       "-fx-background-image : url(kali.png);");
         bpane.setCenter(vbox2);
     }
     public void Pembagian(){
@@ -245,45 +246,46 @@ public class SimpleMathgame extends Application
         this.operan2 = operan2;
         String a=String.valueOf(operan2);
         operan2s.setText(a);
-        int hasil = (int)(Math.random() * 21);
-        String b = String.valueOf(hasil);
-        hasils.setText(b);
-        this.hasil2 = b;
-        this.hasil4 = b;
+        question = new TextField();
         //untuk view of operation
         
-        int temp = this.operan1 / this.operan2;
-        String f = String.valueOf(temp);
+        int a1 = this.operan1;
+        int a2 = this.operan2;
+        int temp = a1 * a2;
+        int r = temp/a1;
+        String f = String.valueOf(r);
         this.hasil1 = f;
-        this.hasil3 = f;
         
-        salah = new Button("Salah");
-        benar = new Button("Benar");
+        cek = new Button("Cek Jawaban");
+        cek.setOnAction(e -> exe());
         
-        salah.setOnAction(e -> exesalah());
-        benar.setOnAction(e -> exebenar());
-        
-        hbox2 = new HBox(10,salah,benar);
+        hbox2 = new HBox(10,cek);
         hbox2.setAlignment(Pos.CENTER);
-        hbox = new HBox(10,operan1s,jumlah,operan2s,equals,hasils);
+        hbox = new HBox(10,operan1s,jumlah,operan2s,equals,question);
         hbox.setAlignment(Pos.CENTER);
         vbox2 = new VBox(10,skor,hbox,hbox2);
         vbox2.setAlignment(Pos.CENTER);
         vbox2.setPadding(new Insets(10));
+        vbox2.setStyle("-fx-padding : 10;"+ 
+                       "-fx-border-style : solid inside;"+
+                       "-fx-border-width : 2;"+
+                       "-fx-border-insets : 5;"+
+                       "-fx-border-radius : 5;"+
+                       "-fx-border-color: blue;"+
+                       "-fx-background-image : url(bagi.png);");
         bpane.setCenter(vbox2);
     }
-    
-    public void exesalah(){
+    public void exe(){
         stage = new Stage();
         Text text = new Text();
         String c = hasil1;
-        String d = hasil2;
         
         Button kembali = new Button("Kembali");
-        kembali.setOnAction(e ->start(stage));
-        if(c != d){
+        kembali.setOnAction(e ->Penjumlahan());
+        
+        if(question.getText().equals(c)){
             this.score = this.score + 5;
-        }else if(c == d){
+        }else{
             this.score = this.score - 5;
         }
         
@@ -295,27 +297,4 @@ public class SimpleMathgame extends Application
         vbox2.setPadding(new Insets(10));
         bpane.setCenter(vbox2);
     }
-    
-    public void exebenar(){
-        stage = new Stage();
-        String a = this.hasil3;
-        String b = this.hasil4;
-        if (a == b){
-            this.score = this.score + 5;
-        }else if(a != b){
-            this.score = this.score - 5;
-        }
-        
-        Text text = new Text();
-        String skor = String.valueOf(this.score);
-        text.setText(skor);
-        Button kembali = new Button("Kembali");
-        kembali.setOnAction(e ->start(stage));
-        vbox2 = new VBox(text,kembali);
-        vbox2.setAlignment(Pos.CENTER);
-        vbox2.setPadding(new Insets(10));
-        bpane.setCenter(vbox2);
-    }
-    
-    
 }
